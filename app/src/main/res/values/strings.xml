@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources [
+    <!ENTITY appname "MyAppName">
+    <!ENTITY author "MrGreen">
+    ]>
+<resources>
+    <!-- COMMUN -->
+    <!--<string name="app_name">&appname;</string>
+    <string name="description">The &appname; app was created by &author;</string>-->
+    <string name="app_name">Boardgamizer</string>
+    <string name="button_reset">Reset</string>
+    <string name="button_draw">Start Picking</string>
+    <string name="button_next">Next</string>
+    <string name="button_draw_again">Again</string>
+    <string name="button_add">Create your list</string>
+    <string name="alert_dialog_delete_title">Delete list</string>
+    <string name="alert_dialog_delete_message">Are you sure you want to delete this list ?</string>
+    <string name="alert_dialog_add_title">Create your list</string>
+    <string name="alert_dialog_save_title">Enter a name for your list</string>
+    <string name="alert_dialog_save_button_save">Save</string>
+    <string name="input_text_filename">Name</string>
+    <string name="no_more_characters">No more %1$s available</string>
+    <string name="zombicide">zbc</string>
+    <string name="zombicide_black_plague">zbp</string>
+    <string name="descent">dsc</string>
+    <string name="the_others">to</string>
+    <string name="arcadia_quest">aq</string>
+    <string name="massive_darkness">md</string>
+    <string name="gender_male">Male</string>
+    <string name="gender_female">Female</string>
+    <string name="type_melee_ranged">Melee/Ranged</string>
+    <string name="type_melee_magic">Melee/Magic</string>
+    <string name="type_ranged_magic">Ranged/Magic</string>
+    <string name="type_melee">Melee</string>
+    <string name="type_ranged">Ranged</string>
+    <string name="type_magic">Magic</string>
+    <string name="cg">Core game</string>
+    <string name="all">All</string>
+    <string name="of">of</string>
+
+    <!-- ZOMBICIDE -->
+    <string name="zbc_characters">survivors</string>
+    <string name="zbc_monsters">zombies</string>
+    <plurals name="zbc_nb_characters">
+        <item quantity="one"> %d survivor</item>
+        <item quantity="other"> %d survivors</item>
+    </plurals>
+    <plurals name="zbc_nb_monsters">
+        <item quantity="one"> %d zombie</item>
+        <item quantity="other"> %d zombies</item>
+    </plurals>
+
+    <!-- ZOMBICIDE : ORIGIN -->
+    <string name="zbc_an">Angry Neighbors</string>
+    <string name="zbc_rm">Rue Morgue</string>
+    <string name="zbc_po">Prison Outbreak</string>
+    <string name="zbc_tcm">Toxic City Mall</string>
+    <string name="zbc_gb_kw">Guest Box: Kevin Walker</string>
+    <string name="zbc_gb_kk">Guest Box: Karl Kopinski</string>
+    <string name="zbc_gb_as">Guest Box: Adrian Smith</string>
+    <string name="zbc_gb_lp">Guest Box: Lucio Parrillo</string>
+    <string name="zbc_gb_pp">Guest Box: Paolo Parente</string>
+    <string name="zbc_gb_jk">Guest Box: John Kovalic</string>
+    <string name="zbc_gb_eg">Guest Box: Edouard Guiton</string>
+    <string name="zbc_gb_mc">Guest Box: Miguel Coimbra</string>
+    <string name="zbc_gnk1">Gaming Night Kit #1</string>
+    <string name="zbc_gnk2">Gaming Night Kit #2</string>
+    <string name="zbc_gnk3">Gaming Night Kit #3</string>
+    <string name="zbc_gnk4">Gaming Night Kit #4</string>
+    <string name="zbc_gnk5">Gaming Night Kit #5</string>
+    <string name="zbc_ks_fs1">KS Free - Season 1</string>
+    <string name="zbc_ks_fs2">KS Free - Season 2</string>
+    <string name="zbc_ks_fs3">KS Free - Season 3</string>
+    <string name="zbc_ks_as1">KS Addon - Season 1</string>
+    <string name="zbc_ks_as2">KS Addon - Season 2</string>
+    <string name="zbc_ks_as3">KS Addon - Season 3</string>
+    <string name="zbc_wok">Wrath of Kings: Promo</string>
+    <string name="zbc_us1">Ultimate Survivors 1</string>
+    <string name="zbc_us2">Ultimate Survivors 2</string>
+
+    <!-- ZOMBICIDE : IMAGE -->
+    <string name="zbc_amy">zbc_amy</string>
+    <string name="zbc_doug">zbc_doug</string>
+    <string name="zbc_josh">zbc_josh</string>
+    <string name="zbc_ned">zbc_ned</string>
+    <string name="zbc_phil">zbc_phil</string>
+    <string name="zbc_wanda">zbc_wanda</string>
+    <string name="zbc_adam">zbc_adam</string>
+    <string name="zbc_jeff">zbc_jeff</string>
+    <string name="zbc_julien">zbc_julien</string>
+    <string name="zbc_tiff">zbc_tiff</string>
+    <string name="zbc_bear">zbc_bear</string>
+    <string name="zbc_cathy">zbc_cathy</string>
+    <string name="zbc_dan">zbc_dan</string>
+    <string name="zbc_james">zbc_james</string>
+    <string name="zbc_jane">zbc_jane</string>
+    <string name="zbc_joe">zbc_joe</string>
+    <string name="zbc_laurie">zbc_laurie</string>
+    <string name="zbc_louise">zbc_louise</string>
+    <string name="zbc_maddie">zbc_maddie</string>
+    <string name="zbc_parker">zbc_parker</string>
+    <string name="zbc_terry">zbc_terry</string>
+    <string name="zbc_travis">zbc_travis</string>
+    <string name="zbc_belle">zbc_belle</string>
+    <string name="zbc_grindlock">zbc_grindlock</string>
+    <string name="zbc_joshua">zbc_joshua</string>
+    <string name="zbc_kim">zbc_kim</string>
+    <string name="zbc_shannon">zbc_shannon</string>
+    <string name="zbc_watts">zbc_watts</string>
+    <string name="zbc_derek">zbc_derek</string>
+    <string name="zbc_elsa">zbc_elsa</string>
+    <string name="zbc_neema">zbc_neema</string>
+    <string name="zbc_raoul">zbc_raoul</string>
+    <string name="zbc_honk">zbc_honk</string>
+    <string name="zbc_mitch">zbc_mitch</string>
+    <string name="zbc_angrymary">zbc_angrymary</string>
+    <string name="zbc_redcapben">zbc_redcapben</string>
+    <string name="zbc_padrejohnson">zbc_padrejohnson</string>
+    <string name="zbc_bones">zbc_bones</string>
+    <string name="zbc_brothermax">zbc_brothermax</string>
+    <string name="zbc_donna">zbc_donna</string>
+    <string name="zbc_maki">zbc_maki</string>
+    <string name="zbc_dylan">zbc_dylan</string>
+    <string name="zbc_matt">zbc_matt</string>
+    <string name="zbc_igor">zbc_igor</string>
+    <string name="zbc_gilly">zbc_gilly</string>
+    <string name="zbc_carson">zbc_carson</string>
+    <string name="zbc_tomiko">zbc_tomiko</string>
+    <string name="zbc_doud">zbc_doud</string>
+    <string name="zbc_peach">zbc_peach</string>
+    <string name="zbc_kevin">zbc_kevin</string>
+    <string name="zbc_kyoko">zbc_kyoko</string>
+    <string name="zbc_thiago">zbc_thiago</string>
+    <string name="zbc_bill">zbc_bill</string>
+    <string name="zbc_m_phal">zbc_m_phal</string>
+    <string name="zbc_jovemnerd">zbc_jovemnerd</string>
+    <string name="zbc_azaghal">zbc_azaghal</string>
+    <string name="zbc_nick">zbc_nick</string>
+    <string name="zbc_elcholo">zbc_elcholo</string>
+    <string name="zbc_dave">zbc_dave</string>
+    <string name="zbc_chaz">zbc_chaz</string>
+    <string name="zbc_troy">zbc_troy</string>
+    <string name="zbc_claudia">zbc_claudia</string>
+    <string name="zbc_eva">zbc_eva</string>
+    <string name="zbc_marvin">zbc_marvin</string>
+    <string name="zbc_ivy">zbc_ivy</string>
+    <string name="zbc_brad">zbc_brad</string>
+    <string name="zbc_thaissa">zbc_thaissa</string>
+    <string name="zbc_kirk">zbc_kirk</string>
+    <string name="zbc_rose">zbc_rose</string>
+    <string name="zbc_ralph">zbc_ralph</string>
+    <string name="zbc_gary">zbc_gary</string>
+    <string name="zbc_achille">zbc_achille</string>
+    <string name="zbc_mack">zbc_mack</string>
+    <string name="zbc_chuck">zbc_chuck</string>
+    <string name="zbc_mike">zbc_mike</string>
+    <string name="zbc_dakota">zbc_dakota</string>
+    <string name="zbc_fred">zbc_fred</string>
+    <string name="zbc_lea">zbc_lea</string>
+    <string name="zbc_rick">zbc_rick</string>
+    <string name="zbc_adriana">zbc_adriana</string>
+    <string name="zbc_will">zbc_will</string>
+    <string name="zbc_ross">zbc_ross</string>
+    <string name="zbc_helen">zbc_helen</string>
+    <string name="zbc_smith">zbc_smith</string>
+    <string name="zbc_don">zbc_don</string>
+    <string name="zbc_frank">zbc_frank</string>
+    <string name="zbc_rob">zbc_rob</string>
+    <string name="zbc_audrey">zbc_audrey</string>
+    <string name="zbc_lucius">zbc_lucius</string>
+    <string name="zbc_cat">zbc_cat</string>
+    <string name="zbc_jesse">zbc_jesse</string>
+    <string name="zbc_doc">zbc_doc</string>
+    <string name="zbc_spencer">zbc_spencer</string>
+    <string name="zbc_seth">zbc_seth</string>
+    <string name="zbc_bastian">zbc_bastian</string>
+    <string name="zbc_yuri">zbc_yuri</string>
+    <string name="zbc_kabir">zbc_kabir</string>
+    <string name="zbc_patrick">zbc_patrick</string>
+    <string name="zbc_oksana">zbc_oksana</string>
+    <string name="zbc_benny">zbc_benny</string>
+    <string name="zbc_nikki">zbc_nikki</string>
+    <string name="zbc_curro">zbc_curro</string>
+    <string name="zbc_kris">zbc_kris</string>
+    <string name="zbc_misstrish">zbc_misstrish</string>
+    <string name="zbc_dick">zbc_dick</string>
+    <string name="zbc_leroy">zbc_leroy</string>
+    <string name="zbc_paul">zbc_paul</string>
+    <string name="zbc_unionworker42">zbc_unionworker42</string>
+    <string name="zbc_amy_us">zbc_amy_us</string>
+    <string name="zbc_doug_us">zbc_doug_us</string>
+    <string name="zbc_josh_us">zbc_josh_us</string>
+    <string name="zbc_ned_us">zbc_ned_us</string>
+    <string name="zbc_phil_us">zbc_phil_us</string>
+    <string name="zbc_wanda_us">zbc_wanda_us</string>
+    <string name="zbc_nick_us">zbc_nick_us</string>
+    <string name="zbc_elcholo_us">zbc_elcholo_us</string>
+    <string name="zbc_dave_us">zbc_dave_us</string>
+    <string name="zbc_chazbc_us">zbc_chazbc_us</string>
+    <string name="zbc_troy_us">zbc_troy_us</string>
+    <string name="zbc_claudia_us">zbc_claudia_us</string>
+    <string name="zbc_marvin_us">zbc_marvin_us</string>
+    <string name="zbc_ivy_us">zbc_ivy_us</string>
+    <string name="zbc_alyanaheska">zbc_alyanaheska</string>
+
+    <!-- MASSIVE DARKNESS -->
+    <string name="md_characters">heroes</string>
+    <string name="md_monsters">monsters</string>
+    <plurals name="md_nb_characters">
+        <item quantity="one"> %d hero</item>
+        <item quantity="other"> %d heroes</item>
+    </plurals>
+    <plurals name="md_nb_monsters">
+        <item quantity="one"> %d monster</item>
+        <item quantity="other"> %d monsters</item>
+    </plurals>
+
+    <!-- MASSIVE DARKNESS : MONSTERS GENDER -->
+    <string name="md_dwarf">Dwarf</string>
+    <string name="md_goblin">Goblin</string>
+    <string name="md_orc">Orc</string>
+    <string name="md_demon">Demon</string>
+    <string name="md_hellhound">Hellhound</string>
+    <string name="md_liliarch">Liliarch</string>
+    <string name="md_ogre">Ogre</string>
+    <string name="md_spider">Spider</string>
+    <string name="md_troll">Troll</string>
+    <string name="md_troglodyte">Troglodyte</string>
+    <string name="md_ratling">Ratling</string>
+    <string name="md_reptisaurian">Reptisaurian</string>
+    <string name="md_elemental">Elemental</string>
+    <string name="md_hellephant">Elephant</string>
+    <string name="md_cyclops">Cyclops</string>
+    <string name="md_cockatrix">Cockatrix</string>
+    <string name="md_fomorian">Fomorian</string>
+    <string name="md_golem">Golem</string>
+    <string name="md_thing">Thing</string>
+    <string name="md_mummy">Mummy</string>
+    <string name="md_mad_unicorn">Mad Unicorn</string>
+    <string name="md_lycanthrop">Lycanthrop</string>
+    <string name="md_zombie">Zombie</string>
+
+    <!-- MASSIVE DARKNESS : ORIGIN -->
+    <string name="md_ks_fs1">KS Free - Season 1</string>
+    <string name="md_eb_troglodytes">Enemy Box : Troglodytes</string>
+    <string name="md_eb_ratlings">Enemy box : Ratlings</string>
+    <string name="md_eb_reptisaurians">Enemy Box : Reptisaurians</string>
+    <string name="md_eb_elementals">Enemy box : Elementals</string>
+    <string name="md_hm_wp_vs_tsc">Heroes &amp; Monster : Warrior Priests vs The Spearmaiden Cyclops</string>
+    <string name="md_hm_ba_vs_th">Heroes &amp; Monster : Bloodmoon Assassins vs The Hellephant</string>
+    <string name="md_zbp_cg">Zombicide Black Plague Core Game</string>
+    <string name="md_zbp_w">Zombicide Black Plague Wulsburg</string>
+    <string name="md_zbp_hb1">Zombicide Black Plague Hero box #1</string>
+    <string name="md_zbp_zbap">Zombicide Black Plague : Zombie Bosses Abomination Pack</string>
+    <string name="md_zbp_gh">Zombicide Green Horde</string>
+    <string name="md_zbp_faf">Zombicide Green Horde : Friends and Foes</string>
+    <string name="md_zbp_nrftw">Zombicide Green Horde : No Rest For The Wicked</string>
+    <string name="md_zbp_gb_pbs2">Zombicide Green Horde : GB Paul Bonner S2</string>
+    <string name="md_zbp_gb_sam">Zombicide Green Horde : GB Sean A. Murray</string>
+    <string name="md_zbp_gb_as">Zombicide Green Horde : GB Adrian Smith</string>
+
+    <!-- MASSIVE DARKNESS : MONSTERS NAME -->
+    <string name="md_mobdwarfdefenders_name">Dwarf Defenders Mob</string>
+    <string name="md_mobdwarfwarriors_name">Dwarf Warriors Mob</string>
+    <string name="md_agentdwarf_name">Dwarf Agent</string>
+    <string name="md_mobgoblinarchers_name">Goblin Archers Mob</string>
+    <string name="md_mobgoblinwarriors_name">Goblin Warriors Mob</string>
+    <string name="md_agentgoblin_name">Goblin Agent</string>
+    <string name="md_moborcenforcers_name">Orc Enforcers Mob</string>
+    <string name="md_moborcflayers_name">Orc Flayers Mob</string>
+    <string name="md_agentorc_name">Orc Agent</string>
+    <string name="md_abyssaldemon_name">Abyssal Demon</string>
+    <string name="md_hellhound_name">Hellhound</string>
+    <string name="md_liliarch_name">Liliarch</string>
+    <string name="md_ogreshaman_name">Ogre Shaman</string>
+    <string name="md_giantspider_name">Giant Spider</string>
+    <string name="md_hightroll_name">High Troll</string>
+    <string name="md_mobtroglodytebrutes_name">Troglodyte Brutes Mob</string>
+    <string name="md_mobtroglodytewarriors_name">Troglodyte Warriors Mob</string>
+    <string name="md_agenttroglodyte_name">Troglodyte Agent</string>
+    <string name="md_bloodseekerminotaur_name">Bloodseeker Minotaur</string>
+    <string name="md_mobratlingcrossbowmen_name">Ratling Crossbowmen Ratlings</string>
+    <string name="md_mobratlingwarriors_name">Ratling Warriors Mob</string>
+    <string name="md_agentratling_name">Ratling Agent</string>
+    <string name="md_ratlingbully_name">Ratling Bully</string>
+    <string name="md_mobreptisaurianblowgunners_name">Reptisaurian Blowgunners Mob</string>
+    <string name="md_mobreptisaurianwarriors_name">Reptisaurian Warriors Mob</string>
+    <string name="md_agentreptisaurian_name">Reptisaurian Agent</string>
+    <string name="md_reptisaurusrex_name">Reptisaurus Rex</string>
+    <string name="md_airelemental_name">Air Elemental</string>
+    <string name="md_earthelemental_name">Earth Elemental</string>
+    <string name="md_fireelemental_name">Fire Elemental</string>
+    <string name="md_waterelemental_name">waterelemental</string>
+    <string name="md_hellephant_name">Hellephant</string>
+    <string name="md_spearmaidencyclops_name">Spearmaiden Cyclops</string>
+    <string name="md_cliffbreakercyclops_name">Cliffbreaker Cyclops</string>
+    <string name="md_cockatrix_name">Cockatrix</string>
+    <string name="md_lordtusk_name">Lord Tusk</string>
+    <string name="md_oni_name">Oni</string>
+    <string name="md_hellsbane_name">Hellsbane</string>
+    <string name="md_fomorian_name">Fomorian</string>
+    <string name="md_fleshgolem_name">Flesh Golem</string>
+    <string name="md_irongolem_name">Iron Golem</string>
+    <string name="md_livingconstruct_name">Living Construct</string>
+    <string name="md_nightmarething_name">Nightmare Thing</string>
+    <string name="md_cunha_name">Cun-Ha</string>
+    <string name="md_ogrebrute_name">Ogre Brute</string>
+    <string name="md_ogrerockbreaker_name">Ogre Rockbreaker</string>
+    <string name="md_grazprug_name">Graz &amp; Prug</string>
+    <string name="md_theoverseer_name">The Overseer</string>
+    <string name="md_lowtroll_name">Low Troll</string>
+    <string name="md_chromatis_name">Chromatis</string>
+    <string name="md_werebear_name">Werebear</string>
+    <string name="md_weretiger_name">Weretiger</string>
+    <string name="md_werewolf_name">Werewolf</string>
+    <string name="md_mobzombiewalkers_name">Zombie Walkers Mob</string>
+    <string name="md_mobzombierunners_name">Zombie Runners Mob</string>
+    <string name="md_agentzombienecromancer_name">Zombie Necromancer Agent</string>
+    <string name="md_mobzombiewolfz_name">Zombie Wolfz Mob</string>
+    <string name="md_mobzombiedeadeyewalkers_name">Zombie Deadeye Walkers Mob</string>
+    <string name="md_abominatroll_name">Abominatroll</string>
+    <string name="md_ablobination_name">Ablobination</string>
+    <string name="md_abominotaur_name">Abominotaur</string>
+    <string name="md_moborcwalkers_name">Orc Walkers Mob</string>
+    <string name="md_mobgoblinrunners_name">Goblin Runners Mob</string>
+    <string name="md_agentorcnecromancer_name">Orc Necromancer Agent</string>
+    <string name="md_orcabomination_name">Orc Abomination</string>
+    <string name="md_mobspectralwalkers_name">Spectral Walkers Mob</string>
+    <string name="md_mobswarmofratz_name">Swarm of Ratz Mob</string>
+    <string name="md_necromanticdragon_name">Necromantic Dragon</string>
+    <string name="md_mobtaintedwalkers_name">Tainted Walkers Mob</string>
+    <string name="md_taintedabomination_name">Tainted Abomination</string>
+    <string name="md_lordofskulls_name">Lord of Skulls</string>
+    <string name="md_doom_name">Doom</string>
+    <string name="md_gloom_name">Gloom</string>
+    <string name="md_faolan_name">Faolan</string>
+    <string name="md_grandinquisitor_name">Grand Inquisitor</string>
+
+    <!-- MASSIVE DARKNESS : TYPE -->
+    <string name="md_type_nightshade_ranger">Nightshade Ranger</string>
+    <string name="md_type_shadow_barbarian">Shadow Barbarian</string>
+    <string name="md_type_pit_fighter_berserker">Pit Fighter Berserker</string>
+    <string name="md_type_battle_wizard">Battle Wizard</string>
+    <string name="md_type_bloodmoon_nightrunner">Bloodmoon Nightrunner</string>
+    <string name="md_type_paladin_fury">Paladin Of Fury</string>
+    <string name="md_type_noble_warrior">Noble Warrior</string>
+    <string name="md_type_barbarian">Barbarian</string>
+    <string name="md_type_bonecrusher">Bonecrusher</string>
+    <string name="md_type_sorcerer">Sorcerer</string>
+    <string name="md_type_bloodmoon_assassin">Bloodmoon Assassin</string>
+    <string name="md_type_warrior_priest">Warrior Priest</string>
+    <string name="md_type_warrior_priestess">Warrior Priestess</string>
+
+    <!-- MASSIVE DARKNESS : MONSTERS TYPE -->
+    <string name="md_type_mob">Mob</string>
+    <string name="md_type_agent">Agent</string>
+    <string name="md_type_roaming">Roaming Monster</string>
+
+    <!-- DESCENT -->
+    <string name="dsc_characters">heroes</string>
+    <string name="dsc_monsters">monsters</string>
+    <plurals name="dsc_nb_characters">
+        <item quantity="one"> %d hero</item>
+        <item quantity="other"> %d heroes</item>
+    </plurals>
+    <plurals name="dsc_nb_monsters">
+        <item quantity="one"> %d monster</item>
+        <item quantity="other"> %d monsters</item>
+    </plurals>
+
+    <!-- DESCENT : GENDER -->
+    <string name="dsc_small">Small</string>
+    <string name="dsc_medium">Medium</string>
+    <string name="dsc_huge">Huge</string>
+    <string name="dsc_massive">Massive</string>
+
+    <!-- DESCENT : ORIGIN -->
+    <string name="dsc_lor">Labyrinth of Ruin</string>
+    <string name="dsc_son">Shadow of Nerekhall</string>
+    <string name="dsc_mor">Manor of Ravens</string>
+    <string name="dsc_lotw">Lair of the Wyrm</string>
+    <string name="dsc_tt">The Trollfens</string>
+    <string name="dsc_mob">Mists of Bilehall</string>
+    <string name="dsc_tctr">The Chains that Rust</string>
+    <string name="dsc_hm_ooto">Hero &amp; Monster : Oath of the Outcast</string>
+    <string name="dsc_hm_cod">Hero &amp; Monster : Crown of Destiny</string>
+    <string name="dsc_hm_cotf">Hero &amp; Monster : Crusade of the Forgotten</string>
+    <string name="dsc_hm_god">Hero &amp; Monster : Guardians of Deephall</string>
+    <string name="dsc_hm_vod">Hero &amp; Monster : Visions of Dawn</string>
+    <string name="dsc_hm_botw">Hero &amp; Monster : Bonds of the Wild</string>
+    <string name="dsc_hm_toc">Hero &amp; Monster : Treaty of Champions</string>
+    <string name="dsc_hm_sots">Hero &amp; Monster : Stewards of the Secret</string>
+    <string name="dsc_hm_soe">Hero &amp; Monster : Shards of Everdark</string>
+    <string name="dsc_lp_raythen">Lieutenant Pack : Raythen</string>
+    <string name="dsc_lp_serena">Lieutenant Pack : Serena</string>
+    <string name="dsc_ck_se">Second Edition Conversion Kit</string>
+
+    <!-- DESCENT : TYPE -->
+    <string name="dsc_type_warrior">Warrior</string>
+    <string name="dsc_type_healer">Healer</string>
+    <string name="dsc_type_mage">Mage</string>
+    <string name="dsc_type_scout">Scout</string>
+
+    <!-- DESCENT : NAME -->
+    <string name="dsc_ashrian_name">Ashrian</string>
+    <string name="dsc_avricalbright_name">Avric Albright</string>
+    <string name="dsc_grisbanthethirsty_name">Grisban the Thirsty</string>
+    <string name="dsc_jainfairwood_name">Jain Fairwood</string>
+    <string name="dsc_leoricofthebook_name">Leoric of the Book</string>
+    <string name="dsc_syndrael_name">Syndrael</string>
+    <string name="dsc_tombleburrowell_name">Tomble Burrowell</string>
+    <string name="dsc_widowtarha_name">Widow Tarha</string>
+    <string name="dsc_dezrathevile_name">Dezra the Vile</string>
+    <string name="dsc_loganlashley_name">Logan Lashley</string>
+    <string name="dsc_pathfinderdurik_name">Pathfinder Durik</string>
+    <string name="dsc_ulmagrimstone_name">Ulma Grimstone</string>
+    <string name="dsc_orkelltheswift_name">Orkell the Swift</string>
+    <string name="dsc_ravaellalightfoot_name">Ravaella Lightfoot</string>
+    <string name="dsc_rendiel_name">Rendiel</string>
+    <string name="dsc_tinashithewanderer_name">Tinashi the Wanderer</string>
+    <string name="dsc_alysraine_name">Alys Raine</string>
+    <string name="dsc_thaidenmistpeak_name">Thaiden Mistpeak</string>
+    <string name="dsc_highmagequellen_name">High Mage Quellen</string>
+    <string name="dsc_reynharttheworthy_name">Reynhart the Worthy</string>
+    <string name="dsc_augurgrisom_name">Augur Grisom</string>
+    <string name="dsc_rogannatheshade_name">Roganna the Shade</string>
+    <string name="dsc_eldermok_name">Elder Mok</string>
+    <string name="dsc_laurelofbloodwood_name">Laurel of Bloodwood</string>
+    <string name="dsc_shiver_name">Shiver</string>
+    <string name="dsc_trenloethestrong_name">Trenloe the Strong</string>
+    <string name="dsc_brothergherinn_name">Brother Gherinn</string>
+    <string name="dsc_corbin_name">Corbin</string>
+    <string name="dsc_jaestheexile_name">Jaes the Exile</string>
+    <string name="dsc_lindel_name">Lindel</string>
+    <string name="dsc_andirarunehand_name">Andira Runehand</string>
+    <string name="dsc_astarra_name">Astarra</string>
+    <string name="dsc_tahlia_name">Tahlia</string>
+    <string name="dsc_tetherys_name">Tetherys</string>
+    <string name="dsc_lordhawthorne_name">Lord Hawthorne</string>
+    <string name="dsc_mordrog_name">Mordrog</string>
+    <string name="dsc_sahla_name">Sahla</string>
+    <string name="dsc_silhouette_name">Silhouette</string>
+    <string name="dsc_ispher_name">Ispher</string>
+    <string name="dsc_masterthorn_name">Master Thorn</string>
+    <string name="dsc_narathefang_name">Nara the Fang</string>
+    <string name="dsc_sirvaladir_name">Sir Valadir</string>
+    <string name="dsc_challara_name">Challara</string>
+    <string name="dsc_lyssa_name">Lyssa</string>
+    <string name="dsc_ronanofthewild_name">Ronan of the Wild</string>
+    <string name="dsc_vyrahthefalconer_name">Vyrah the Falconer</string>
+    <string name="dsc_greyker_name">Grey Ker</string>
+    <string name="dsc_jonasthekind_name">Jonas the Kind</string>
+    <string name="dsc_krutzbeck_name">Krutzbeck</string>
+    <string name="dsc_zyla_name">Zyla</string>
+    <string name="dsc_nanokoftheblade_name">Nanok of the Blade</string>
+    <string name="dsc_okalukandrakash_name">Okaluk and Rakash</string>
+    <string name="dsc_tatianna_name">Tatianna</string>
+    <string name="dsc_truthseerkel_name">Truthseer Kel</string>
+    <string name="dsc_arvelworldwalker_name">Arvel Worldwalker</string>
+    <string name="dsc_karnon_name">Karnon</string>
+    <string name="dsc_onefist_name">One Fist</string>
+    <string name="dsc_steelhorns_name">Steelhorns</string>
+    <string name="dsc_raythen_name">Raythen</string>
+    <string name="dsc_serena_name">Serena</string>
+    <string name="dsc_aurim_name">Aurim</string>
+    <string name="dsc_bograntheshadow_name">Bogran the Shadow</string>
+    <string name="dsc_brotherglyr_name">Brother Glyr</string>
+    <string name="dsc_eliam_name">Eliam</string>
+    <string name="dsc_hugotheglorious_name">Hugo the Glorious</string>
+    <string name="dsc_kirga_name">Kirga</string>
+    <string name="dsc_landrecthewise_name">Landrec the Wise</string>
+    <string name="dsc_laughinbuldar_name">Laughin Buldar</string>
+    <string name="dsc_madcarthos_name">Mad Carthos</string>
+    <string name="dsc_redscorpion_name">Red Scorpion</string>
+    <string name="dsc_tobinfarslayer_name">Tobin Farslayer</string>
+    <string name="dsc_varikasthedead_name">Varikas the Dead</string>
+
+    <!-- DESCENT : MONSTER NAME -->
+    <string name="dsc_arachyura_name">Arachyura</string>
+    <string name="dsc_bandit_name">Bandit</string>
+    <string name="dsc_banespider_name">Bane Spider</string>
+    <string name="dsc_barghest_name">Barghest</string>
+    <string name="dsc_beastman_name">Beastman</string>
+    <string name="dsc_bloodape_name">Blood Ape</string>
+    <string name="dsc_bonehorror_name">Bone Horror</string>
+    <string name="dsc_broodwalker_name">Broodwalker</string>
+    <string name="dsc_carriondrake_name">Carrion Drake</string>
+    <string name="dsc_cavespider_name">Cave Spider</string>
+    <string name="dsc_changeling_name">Changeling</string>
+    <string name="dsc_chaosbeast_name">Chaos Beast</string>
+    <string name="dsc_crowhag_name">Crow Hag</string>
+    <string name="dsc_cryptdragon_name">Crypt Dragon</string>
+    <string name="dsc_darkminotaur_name">Dark Minotaur</string>
+    <string name="dsc_darkpriest_name">Dark Priest</string>
+    <string name="dsc_deepelf_name">Deep Elf</string>
+    <string name="dsc_demonlord_name">Demon Lord</string>
+    <string name="dsc_elemental_name">Elemental</string>
+    <string name="dsc_ettin_name">Ettin</string>
+    <string name="dsc_ferrox_name">Ferrox</string>
+    <string name="dsc_fireimps_name">Fire Imps</string>
+    <string name="dsc_fleshmoulder_name">Flesh Moulder</string>
+    <string name="dsc_giant_name">Giant</string>
+    <string name="dsc_goblinarcher_name">Goblin Archer</string>
+    <string name="dsc_goblinwitcher_name">Goblin Witcher</string>
+    <string name="dsc_golem_name">Golem</string>
+    <string name="dsc_harpy_name">Harpy</string>
+    <string name="dsc_hellhound_name">Hellhound</string>
+    <string name="dsc_hybridsentinel_name">Hybrid Sentinel</string>
+    <string name="dsc_icewyrm_name">Ice Wyrm</string>
+    <string name="dsc_ironbound_name">Ironbound</string>
+    <string name="dsc_kobold_name">Kobold</string>
+    <string name="dsc_lavabeetle_name">Lava Beetle</string>
+    <string name="dsc_manticore_name">Manticore</string>
+    <string name="dsc_marrowpriest_name">Marrow Priest</string>
+    <string name="dsc_medusa_name">Medusa</string>
+    <string name="dsc_merriod_name">Merriod</string>
+    <string name="dsc_naga_name">Naga</string>
+    <string name="dsc_ogre_name">Ogre</string>
+    <string name="dsc_plagueworm_name">Plague Worm</string>
+    <string name="dsc_ratswarm_name">Rat Swarm</string>
+    <string name="dsc_razorwing_name">Razorwing</string>
+    <string name="dsc_reanimate_name">Reanimate</string>
+    <string name="dsc_shade_name">Shade</string>
+    <string name="dsc_shadowdragon_name">Shadow Dragon</string>
+    <string name="dsc_shamblingcolossus_name">Shambling Colossus</string>
+    <string name="dsc_skeletonarcher_name">Skeleton Archer</string>
+    <string name="dsc_sorcerer_name">Sorcerer</string>
+    <string name="dsc_thedispossessed_name">The Dispossessed</string>
+    <string name="dsc_troll_name">Troll</string>
+    <string name="dsc_volucrixreaver_name">Volucrix Reaver</string>
+    <string name="dsc_wendigo_name">Wendigo</string>
+    <string name="dsc_wraith_name">Wraith</string>
+    <string name="dsc_ynfernaelhulk_name">Ynfernael Hulk</string>
+    <string name="dsc_zombie_name">Zombie</string>
+
+    <!-- ZOMBICIDE BLACK PLAGUE -->
+    <string name="zbp_characters">survivors</string>
+    <string name="zbp_monsters">zombies</string>
+    <plurals name="zbp_nb_characters">
+        <item quantity="one"> %d survivor</item>
+        <item quantity="other"> %d survivors</item>
+    </plurals>
+    <plurals name="zbp_nb_monsters">
+        <item quantity="one"> %d zombie</item>
+        <item quantity="other"> %d zombies</item>
+    </plurals>
+
+    <!-- ZOMBICIDE BLACK PLAGUE : ORIGIN -->
+    <string name="zbp_w">Wulsburg</string>
+    <string name="zbp_hb1">Hero box #1</string>
+    <string name="zbp_ks_fs1">KS Free - Season 1</string>
+    <string name="zbp_ks_as1">KS Addon - Season 1</string>
+    <string name="zbp_rp_s1">Retail Promo - Season 1</string>
+    <string name="zbp_gb_pb">Guest Box: Paul Bonner</string>
+    <string name="zbp_gb_eg">Guest Box: Edouard Guiton</string>
+    <string name="zbp_gb_pp">Guest Box: Paolo Parente</string>
+    <string name="zbp_gb_as">Guest Box: Adrian Smith</string>
+    <string name="zbp_gb_sk">Guest Box: Stefan Kopinski</string>
+    <string name="zbp_gb_kk">Guest Box: Karl Kopinski</string>
+    <string name="zbp_gb_n">Guest Box: Naiade</string>
+    <string name="zbp_gb_ms">Guest Box: Mark Simonetti</string>
+    <string name="zbp_gb_jn">Guest Box: Jovem Nerd</string>
+    <string name="zbp_gb_g">Guest Box: Gipi</string>
+    <string name="zbp_gb_jh">Guest Box: John Howe</string>
+    <string name="zbp_gb_na">Guest Box: Neal Adams</string>
+    <string name="zbp_gb_cc">Guest Box: Carl Critchlow</string>
+    <string name="zbp_gh">Green Horde</string>
+    <string name="zbp_faf">Friends and Foes</string>
+    <string name="zbp_gb_pbs2">Guest Box: Paul Bonner Season 2</string>
+    <string name="zbp_gb_sam">Guest Box: Sean A. Murray</string>
+    <string name="zbp_ks_fs2">KS Free - Season 2</string>
+    <string name="zbp_ks_as2">KS Addon - Season 2</string>
+    <string name="zbp_us">Ultimate Survivors</string>
+
+    <!-- ARCADIA QUEST -->
+    <string name="aq_characters">characters</string>
+    <string name="aq_monsters">monsters</string>
+    <plurals name="aq_nb_characters">
+        <item quantity="one"> %d character</item>
+        <item quantity="other"> %d characters</item>
+    </plurals>
+    <plurals name="aq_nb_monsters">
+        <item quantity="one"> %d monster</item>
+        <item quantity="other"> %d monsters</item>
+    </plurals>
+
+    <!-- THE OTHERS -->
+    <string name="to_characters">heroes</string>
+    <string name="to_monsters">monsters</string>
+    <plurals name="to_nb_characters">
+        <item quantity="one"> %d hero</item>
+        <item quantity="other"> %d heroes</item>
+    </plurals>
+    <plurals name="to_nb_monsters">
+        <item quantity="one"> %d monster</item>
+        <item quantity="other"> %d monsters</item>
+    </plurals>
+
+    <!-- THE OTHERS : ORIGIN -->
+    <string name="to_bt">Beta Team</string>
+    <string name="to_gt">Gamma Team</string>
+    <string name="to_dt">Delta Team</string>
+    <string name="to_mof">Men of FAITH</string>
+    <string name="to_sor">Sons of Ragnarok</string>
+    <string name="to_ks_fs1">KS Free - Season 1</string>
+
+    <!-- THE OTHERS : TYPE -->
+    <string name="to_type_sniper">Sniper</string>
+    <string name="to_type_bruiser">Bruiser</string>
+    <string name="to_type_fixer">Fixer</string>
+    <string name="to_type_leader">Leader</string>
+</resources>
