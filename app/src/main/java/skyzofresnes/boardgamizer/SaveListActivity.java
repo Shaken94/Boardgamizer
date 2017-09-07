@@ -123,6 +123,9 @@ public class SaveListActivity extends AppCompatActivity {
                 })*/;
 
         final AlertDialog alertDialogSaveInputFilename = builderSetListname.create();
+
+
+
         // Initially disable the button
         alertDialogSaveInputFilename.show();
         final Button buttonPositive = alertDialogSaveInputFilename.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -156,16 +159,16 @@ public class SaveListActivity extends AppCompatActivity {
         });
 
         //inflate.getMeasuredHeight();
-        ImageButton btnAdd1 = (ImageButton) inflate.findViewById(R.id.button_cancelfilename);
-        btnAdd1.setOnClickListener(new View.OnClickListener(){
+        ImageButton btnCancel = (ImageButton) inflate.findViewById(R.id.button_cancel);
+        btnCancel.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                findViewById(R.id.alertDialog_save_input_filename);
-                ((AlertDialog) v.getParent().getParent()).dismiss();
+                alertDialogSaveInputFilename.dismiss();
             }
         });
 
-        ImageButton btnAdd2 = (ImageButton) inflate.findViewById(R.id.button_okfilename);
-        btnAdd2.setOnClickListener(new View.OnClickListener() {
+        ImageButton btnOk = (ImageButton) inflate.findViewById(R.id.button_ok);
+
+        btnOk.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 EditText inputFilename = (EditText) inflate.findViewById(R.id.inputFilename);
                 String filenameChosen = inputFilename.getText().toString();
@@ -184,7 +187,7 @@ public class SaveListActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    //dialog.dismiss();
+                    alertDialogSaveInputFilename.dismiss();
                     Intent intent = new Intent();
                     intent.putExtra("filenameChosen", filenameChosen);
                     setResult(Activity.RESULT_OK, intent);

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,10 +47,13 @@ public class CharacterListActivity extends AppCompatActivity {
         filename = getIntent().getStringExtra(Constantes.FILENAME);
 
         //set isMonsters
-        if (filename.toLowerCase().startsWith(Constantes.ALL_MONSTERS,4) || filename.toLowerCase().startsWith(Constantes.AROBASE + Constantes.MONSTERS)) {
+        if (filename.toLowerCase().startsWith(boardgameMini + Constantes.UNDERSCORE + Constantes.ALL_MONSTERS) || filename.toLowerCase().startsWith(Constantes.AROBASE + Constantes.MONSTERS)) {
             isMonsters = Boolean.TRUE;
+            ((ImageButton) findViewById(R.id.button_pick)).setImageResource(R.drawable.pick_again_monster1);
+            ((ImageButton) findViewById(R.id.button_pick_next)).setImageResource(R.drawable.pick_next_monster1);
         }
-            //récupération du drawable selon le jeu choisi
+
+        //récupération du drawable selon le jeu choisi
         int bgImageId = getResources().getIdentifier(boardgameMini + Constantes.BG, Constantes.DRAWABLE, getPackageName());
         //set du background selon bgImageId
         findViewById(R.id.characterlist_activity).setBackgroundResource(bgImageId);
