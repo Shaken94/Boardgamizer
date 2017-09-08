@@ -4,6 +4,12 @@
     <!ENTITY author "MrGreen">
     ]>
 <resources>
+    <!-- TOAST MESSAGES -->
+    <string name="error_reading_file">Erreur durant la lecture de {0} : {1}.</string>
+    <string name="error_getting_file">"Erreur durant la récupération de {0} : {1}.</string>
+    <string name="error_count_characters_file">"Erreur de comptage dans {0} : {1}.</string>
+    <string name="deleting_file_impossible">Supression de {0} impossible.</string>
+
     <!-- COMMUN -->
     <!--<string name="app_name">&appname;</string>
     <string name="description">L\'application &appname; a été créée par &author;</string>-->
@@ -37,6 +43,9 @@
     <string name="cg">Boite de base</string>
     <string name="all">Tous les</string>
     <string name="of">de</string>
+    <string name="radioGroupGender">Sexe/Race/Taille</string>
+    <string name="radioGroupOrigin">Provenance</string>
+    <string name="radioGroupType">Type</string>
 
     <!-- ZOMBICIDE -->
     <string name="zbc_characters">survivants</string>

@@ -11,10 +11,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/input_text_filename"
-        android:inputType="text">
-
-        <requestFocus />
-    </EditText>
+        android:inputType="text" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,10 +26,8 @@
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:background="@android:color/transparent"
-            android:contentDescription=""
-            android:minHeight="179dp"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/cancel1" />
+            app:srcCompat="@drawable/cancelcercle1" />
 
         <ImageButton
             android:id="@+id/button_ok"
@@ -42,7 +37,7 @@
             android:adjustViewBounds="true"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/ok1" />
+            app:srcCompat="@drawable/okcercle1" />
     </LinearLayout>
 
 

@@ -4,6 +4,12 @@
     <!ENTITY author "MrGreen">
     ]>
 <resources>
+    <!-- TOAST MESSAGES -->
+    <string name="error_reading_file">Error reading {0} : {1}.</string>
+    <string name="error_getting_file">"Error getting {0} : {1}.</string>
+    <string name="error_count_characters_file">"Count characters in {0} error: {1}.</string>
+    <string name="deleting_file_impossible">Deleting {0} impossible.</string>
+
     <!-- COMMUN -->
     <!--<string name="app_name">&appname;</string>
     <string name="description">The &appname; app was created by &author;</string>-->
@@ -37,6 +43,9 @@
     <string name="cg">Core game</string>
     <string name="all">All</string>
     <string name="of">of</string>
+    <string name="radioGroupGender">Gender/Race/Size</string>
+    <string name="radioGroupOrigin">Origin</string>
+    <string name="radioGroupType">Type</string>
 
     <!-- ZOMBICIDE -->
     <string name="zbc_characters">survivors</string>

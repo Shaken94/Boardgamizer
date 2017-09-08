@@ -16,6 +16,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.MessageFormat;
 import java.util.List;
 
 /**
@@ -111,7 +112,7 @@ public final class FilenameListAdapter extends BaseAdapter {
                 try {
                     iStream = new FileInputStream(activity.getFilesDir() + File.separator + boardgameMini + File.separator + filename);
                 } catch (FileNotFoundException e) {
-                    Toast.makeText(activity, "Error getting file '" + filename + "' : " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity, MessageFormat.format(resources.getString(R.string.error_getting_file), filename, e.getMessage()), Toast.LENGTH_LONG).show();
                 }
             }else {
                 iStream = resources.openRawResource(resourceId);
@@ -128,7 +129,7 @@ public final class FilenameListAdapter extends BaseAdapter {
             String characters = resources.getQuantityString(idNbCharacters, count, count);
             holder.nbCharacters.setText(characters);
         } catch (IOException e) {
-            Toast.makeText(activity, "Count characters in file '" + filename + "' error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(activity, MessageFormat.format(resources.getString(R.string.error_count_characters_file), filename, e.getMessage()), Toast.LENGTH_LONG).show();
         }
 
         return view;

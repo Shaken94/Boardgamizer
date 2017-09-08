@@ -35,40 +35,48 @@
     <LinearLayout
         android:id="@+id/layout_buttons_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
         android:orientation="horizontal"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="0dp">
 
-        <Button
+        <ImageButton
             android:id="@+id/button_pick"
-            style="?attr/buttonBarNegativeButtonStyle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
             android:onClick="clickButtonPick"
-            android:text="@string/button_draw_again"
-            android:textAllCaps="false" />
+            android:scaleType="fitCenter"
+            android:tag="@string/button_draw_again"
+            app:srcCompat="@drawable/pick_again_character1" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button_pick_next"
-            style="?attr/buttonBarNeutralButtonStyle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
             android:onClick="clickButtonPickNext"
-            android:text="@string/button_next"
-            android:textAllCaps="false" />
+            android:scaleType="fitCenter"
+            android:tag="@string/button_next"
+            app:srcCompat="@drawable/pick_next_character1" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button_reset"
-            style="?attr/buttonBarPositiveButtonStyle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:minHeight="179dp"
             android:onClick="clickButtonReset"
-            android:text="@string/button_reset"
-            android:textAllCaps="false" />
+            android:scaleType="fitCenter"
+            android:tag="@string/button_reset"
+            app:srcCompat="@drawable/reset1" />
 
     </LinearLayout>
 

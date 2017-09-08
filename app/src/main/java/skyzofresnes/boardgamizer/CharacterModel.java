@@ -70,4 +70,11 @@ public class CharacterModel {
     public void setSelected(boolean selected) {
         this.selected = selected;
     }
+
+    @Override
+    public String toString() {
+        return name + " "
+                + gender + " "
+                + origin + " " + type;
+    }
 }

@@ -7,13 +7,20 @@ import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.lang.reflect.Field;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -134,33 +141,49 @@ public class FilenameListActivity extends AppCompatActivity {
                     if (!filename.toLowerCase().equals(boardgameMini + Constantes.UNDERSCORE + Constantes.ALL)
                             && !filename.toLowerCase().equals(boardgameMini + Constantes.UNDERSCORE + Constantes.ALL_MONSTERS)) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(FilenameListActivity.this);
-                        builder.setTitle(R.string.alert_dialog_delete_title)
+
+                        // Get the layout inflater
+                        final LayoutInflater inflater = getLayoutInflater();
+                        // Inflate and set the layout for the dialog
+                        // Pass null as the parent view because its going in the dialog layout
+                        final View inflate = inflater.inflate(R.layout.alertdialog_save_input_filename, null);
+
+                        // Don't display the editText
+                        ((EditText) inflate.findViewById(R.id.inputFilename)).setVisibility(View.GONE);
+                        builder.setView(inflate)
+                                .setTitle(R.string.alert_dialog_delete_title)
                                 .setMessage(R.string.alert_dialog_delete_message)
                                 .setCancelable(true);
 
+                        // Create the AlertDialog
+                        final AlertDialog dialog = builder.create();
+
                         // Add the buttons
-                        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                //String filename = filenameList.get(itemClicked);
+                        ImageButton btnCancel = (ImageButton) inflate.findViewById(R.id.button_cancel);
+                        btnCancel.setOnClickListener(new View.OnClickListener(){
+                            public void onClick(View v) {
+                                dialog.cancel();
+                            }
+                        });
+
+                        ImageButton btnOk = (ImageButton) inflate.findViewById(R.id.button_ok);
+                        btnOk.setOnClickListener(new View.OnClickListener() {
+                            public void onClick(View v) {
                                 File file = new File(getFilesDir() + File.separator + boardgameMini + File.separator, filename);
                                 boolean deleted = file.delete();
 
                                 if (deleted && filenameList.contains(filename)) {
                                     filenameList.remove(filenameList.indexOf(filename));
+                                }else{
+                                    //Toast.makeText(FilenameListActivity.this, "Deleting file " + filename + " impossible.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(FilenameListActivity.this, MessageFormat.format(getString(R.string.deleting_file_impossible), filename), Toast.LENGTH_SHORT).show();
                                 }
 
                                 ((FilenameListAdapter) listViewFilenameList.getAdapter()).updateRecords(filenameList);
-                            }
-                        });
-                        builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // User cancelled the dialog
-                                dialog.cancel();
+                                dialog.dismiss();
                             }
                         });
 
-                        // Create the AlertDialog
-                        AlertDialog dialog = builder.create();
                         dialog.show();
                         //Toast.makeText(FilenameListActivity.this, "long click detected", Toast.LENGTH_SHORT).show();
                     }else{// Si click sur liste de l'appli on crée une liste perso

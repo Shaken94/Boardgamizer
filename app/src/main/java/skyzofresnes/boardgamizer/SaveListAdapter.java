@@ -2,13 +2,16 @@ package skyzofresnes.boardgamizer;
 
 import android.app.Activity;
 import android.content.res.Resources;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,8 +21,10 @@ import java.util.List;
 public class SaveListAdapter extends BaseAdapter {
 
     Activity activity;
-    List<CharacterModel> characters;
+    List<CharacterModel> filterCharacters;
+    List<CharacterModel> originalCharacters;
     LayoutInflater inflater;
+    private CharacterModelFilter filter;
 
     public SaveListAdapter(Activity activity) {
         this.activity = activity;
@@ -27,13 +32,16 @@ public class SaveListAdapter extends BaseAdapter {
 
     public SaveListAdapter(Activity activity, List<CharacterModel> characters) {
         this.activity   = activity;
-        this.characters = characters;
+        this.filterCharacters = new ArrayList<>();
+        this.filterCharacters.addAll(characters);
+        this.originalCharacters = new ArrayList<>();
+        this.originalCharacters.addAll(characters);
         inflater        = activity.getLayoutInflater();
     }
 
     @Override
     public int getCount() {
-        return characters.size();
+        return filterCharacters.size();
     }
 
     @Override
@@ -44,6 +52,13 @@ public class SaveListAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return position;
+    }
+
+    public Filter getFilter() {
+        if (filter == null){
+            filter  = new CharacterModelFilter();
+        }
+        return filter;
     }
 
     @Override
@@ -66,7 +81,7 @@ public class SaveListAdapter extends BaseAdapter {
         }else
             holder = (ViewHolder)view.getTag();
 
-        CharacterModel characterModel = characters.get(position);
+        CharacterModel characterModel = filterCharacters.get(position);
 
         if (characterModel.isSelected()) {
             holder.checked.setBackgroundResource(R.drawable.checked);
@@ -113,9 +128,28 @@ public class SaveListAdapter extends BaseAdapter {
     }
 
     public void updateRecords(List<CharacterModel> characters){
-        this.characters = characters;
+        this.filterCharacters = characters;
 
         notifyDataSetChanged();
+    }
+
+    // Filter Class
+    public void filter(String constraint) {
+        List<CharacterModel> listFiltered = new ArrayList<>();
+
+        if(!TextUtils.isEmpty(constraint)) {
+            for (CharacterModel characterModel : originalCharacters)
+            {
+                if (characterModel.toString().toLowerCase().contains(constraint)){
+                    listFiltered.add(characterModel);
+                }
+            }
+        }
+        else{
+            listFiltered.addAll(originalCharacters);
+        }
+
+        updateRecords(listFiltered);
     }
 
     class ViewHolder {
@@ -125,5 +159,67 @@ public class SaveListAdapter extends BaseAdapter {
         TextView origin;
         TextView type;
         ImageView imgCharacter;
+    }
+
+    public class CharacterModelFilter extends Filter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            constraint = constraint.toString().toLowerCase();
+            FilterResults result = new FilterResults();
+            if(constraint != null && constraint.toString().length() > 0)
+            {
+                List<CharacterModel> filteredItems = new ArrayList<>();
+
+                for (CharacterModel characterModel : originalCharacters){
+
+                    if (characterModel.toString().toLowerCase().contains(constraint)){
+                        filteredItems.add(characterModel);
+                    }
+                }
+                result.count = filteredItems.size();
+                result.values = filteredItems;
+            }
+            else
+            {
+                synchronized(this)
+                {
+                    result.values = originalCharacters;
+                    result.count = originalCharacters.size();
+                }
+            }
+            return result;
+        }
+
+        protected FilterResults performFiltering(List<String> constraint) {
+            //constraint = constraint.toString().toLowerCase();
+            FilterResults result = new FilterResults();
+            if(constraint != null && constraint.toString().length() > 0)
+            {
+                List<CharacterModel> filteredItems = new ArrayList<>();
+
+                for (CharacterModel characterModel : originalCharacters){
+
+                   /* if (characterModel.toString().toLowerCase().contains(constraint)){
+                        filteredItems.add(characterModel);
+                    }*/
+                }
+                result.count = filteredItems.size();
+                result.values = filteredItems;
+            }
+            else
+            {
+                synchronized(this)
+                {
+                    result.values = originalCharacters;
+                    result.count = originalCharacters.size();
+                }
+            }
+            return result;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            updateRecords((ArrayList<CharacterModel>)results.values);
+        }
     }
 }

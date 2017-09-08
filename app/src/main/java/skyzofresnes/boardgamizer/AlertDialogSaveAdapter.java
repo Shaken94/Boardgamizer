@@ -52,7 +52,7 @@ public class AlertDialogSaveAdapter extends BaseAdapter {
         ViewHolder holder = null;
 
         if (view == null){
-            view = inflater.inflate(R.layout.alertdialog_save_listview_item, viewGroup, false);
+            view = inflater.inflate(R.layout.savelist_listview_item, viewGroup, false);
 
             holder = new ViewHolder();
 

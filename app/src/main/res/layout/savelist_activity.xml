@@ -24,11 +24,45 @@
         android:id="@+id/layout_buttons_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="2"
         android:orientation="horizontal"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="0dp" >
+        tools:layout_editor_absoluteY="0dp">
 
-        <Button
+        <ImageButton
+            android:id="@+id/button_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:onClick="clickButtonFilters"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/filters1" />
+
+        <ImageButton
+            android:id="@+id/button_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:onClick="clickButtonCancel"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/cancelcercle1" />
+
+        <ImageButton
+            android:id="@+id/button_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:onClick="clickButtonSave"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/save1" />
+
+        <!--<Button
             android:id="@+id/button_cancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="clickButtonSave"
-            android:text="@string/alert_dialog_save_button_save" />
+            android:text="@string/alert_dialog_save_button_save" />-->
 
     </LinearLayout>
 

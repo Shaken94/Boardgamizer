@@ -16,6 +16,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -36,7 +37,7 @@ public class CharacterListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.characterlist_activity2);
+        setContentView(R.layout.characterlist_activity);
 
         //set the listview
         listViewCharacter = (ListView) findViewById(R.id.listview);
@@ -167,7 +168,7 @@ public class CharacterListActivity extends AppCompatActivity {
             try {
                 characterList.addAll(FileUtils.readJsonStream(iStream));
             } catch (IOException e) {
-                Toast.makeText(getApplicationContext(), "Error reading file : " + e.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), MessageFormat.format(getString(R.string.error_reading_file), filename, e.getMessage()), Toast.LENGTH_LONG).show();
             }
 
             return null;
@@ -188,7 +189,7 @@ public class CharacterListActivity extends AppCompatActivity {
                     CharacterModel characterModel = charactersSelected.get(position);
                     //listViewCharacterAdapter.updateRecords(charactersSelected);
 
-                    Toast.makeText(CharacterListActivity.this, characterModel.getName() + " clicked", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(CharacterListActivity.this, characterModel.getName() + " clicked", Toast.LENGTH_SHORT).show();
                 }
             });
         }
