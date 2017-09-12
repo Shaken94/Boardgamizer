@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -19,12 +20,11 @@ import java.util.List;
  */
 
 public class SaveListAdapter extends BaseAdapter {
-
     Activity activity;
     List<CharacterModel> filterCharacters;
     List<CharacterModel> originalCharacters;
     LayoutInflater inflater;
-    private CharacterModelFilter filter;
+    //private CharacterModelFilter filter;
 
     public SaveListAdapter(Activity activity) {
         this.activity = activity;
@@ -54,12 +54,14 @@ public class SaveListAdapter extends BaseAdapter {
         return position;
     }
 
+/*
     public Filter getFilter() {
         if (filter == null){
             filter  = new CharacterModelFilter();
         }
         return filter;
     }
+*/
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
@@ -134,22 +136,144 @@ public class SaveListAdapter extends BaseAdapter {
     }
 
     // Filter Class
-    public void filter(String constraint) {
-        List<CharacterModel> listFiltered = new ArrayList<>();
+ /*   public void filter(String name, List<String> genderConstraints, List<String> originConstraints, List<String> typeConstraints) {
+        List<CharacterModel> listAfterName = new ArrayList<>();
+        if (!TextUtils.isEmpty(name)){
+            addFilterConstraint(originalCharacters, listAfterName, name);
+        }
+        else{
+            listAfterName.addAll(originalCharacters);
+        }
 
-        if(!TextUtils.isEmpty(constraint)) {
-            for (CharacterModel characterModel : originalCharacters)
-            {
-                if (characterModel.toString().toLowerCase().contains(constraint)){
-                    listFiltered.add(characterModel);
+        List<CharacterModel> listAfterGender = new ArrayList<>();
+        if (!genderConstraints.isEmpty()){
+            for(String genderConstraint : genderConstraints){
+                addFilterConstraint(listAfterName, listAfterGender, genderConstraint);
+            }
+        }
+        else{
+            listAfterGender.addAll(listAfterName);
+        }
+
+        List<CharacterModel> listAfterOrigin = new ArrayList<>();
+        if (!originConstraints.isEmpty()){
+            for(String originConstraint : originConstraints){
+                addFilterConstraint(listAfterGender, listAfterOrigin, originConstraint);
+            }
+        }
+        else{
+            listAfterOrigin.addAll(listAfterGender);
+        }
+
+        List<CharacterModel> listAfterType = new ArrayList<>();
+        if (!typeConstraints.isEmpty()){
+            for(String typeConstraint : typeConstraints){
+                addFilterConstraint(listAfterOrigin, listAfterType, typeConstraint);
+            }
+        }
+        else{
+            listAfterType.addAll(listAfterOrigin);
+        }
+
+        updateRecords(listAfterType);
+    }
+*/
+
+    public void filter(String name, HashMap<String, List<String>> kMap) {
+        List<CharacterModel> listAfterName = new ArrayList<>();
+        if (!TextUtils.isEmpty(name)){
+            for (CharacterModel characterModel : originalCharacters) {
+                if (characterModel.getName().toLowerCase().contains(name)) {
+                    listAfterName.add(characterModel);
                 }
             }
         }
         else{
-            listFiltered.addAll(originalCharacters);
+            listAfterName.addAll(originalCharacters);
         }
 
-        updateRecords(listFiltered);
+        List<CharacterModel> listIn = new ArrayList<>(listAfterName);
+        //kMap.keySet();
+        for (String str : kMap.keySet()){
+        //for(int i=0; i < kMap.size(); i++) {
+            List<CharacterModel> listOut = new ArrayList<>();
+/*
+            List<String> listConstraints;
+                listConstraints =  kMap.get(i);
+
+            if (!listConstraints.isEmpty()) {
+*/
+                for (String constraint : kMap.get(str)) {
+                    addFilterConstraint(listIn, listOut, str, constraint);
+                }
+/*
+            } else {
+                listOut.addAll(listIn);
+            }
+*/
+            listIn = listOut;
+        }
+
+/*
+        List<CharacterModel> listAfterGender = new ArrayList<>();
+        List<String> genderConstraints = kMap.get(1);
+        if (!genderConstraints.isEmpty()){
+            for(String genderConstraint : genderConstraints){
+                addFilterConstraint(listAfterName, listAfterGender, genderConstraint);
+            }
+        }
+        else{
+            listAfterGender.addAll(listAfterName);
+        }
+
+        List<CharacterModel> listAfterOrigin = new ArrayList<>();
+        List<String> originConstraints = kMap.get(2);
+        if (!originConstraints.isEmpty()){
+            for(String originConstraint : originConstraints){
+                for(CharacterModel characterModel : listAfterGender){
+                    if(characterModel.getOrigin().equals(originConstraint)){
+                        listAfterOrigin.add(characterModel);
+                    }
+                }
+            }
+        }
+        else{
+            listAfterOrigin.addAll(listAfterGender);
+        }
+
+        List<CharacterModel> listAfterType = new ArrayList<>();
+        List<String> typeConstraints = kMap.get(0);
+        if (!typeConstraints.isEmpty()){
+            for(String typeConstraint : typeConstraints){
+                for(CharacterModel characterModel : listAfterOrigin){
+                    if(characterModel.getType().equals(typeConstraint)){
+                        listAfterType.add(characterModel);
+                    }
+                }
+            }
+        }
+        else{
+            listAfterType.addAll(listAfterOrigin);
+        }
+
+
+        updateRecords(listAfterType);
+*/
+        updateRecords(listIn);
+    }
+
+    private void addFilterConstraint(List<CharacterModel> listIn, List<CharacterModel> listOut, String str, String constraint) {
+        for(CharacterModel characterModel : listIn){
+            if (str.equals(activity.getString(R.string.radioGroupGender)) && characterModel.getGender().equals(constraint)) {
+                listOut.add(characterModel);
+            }
+            if (str.equals(activity.getString(R.string.radioGroupOrigin)) && characterModel.getOrigin().equals(constraint)) {
+                listOut.add(characterModel);
+            }
+            if (str.equals(activity.getString(R.string.radioGroupType)) && characterModel.getType().equals(constraint)) {
+                listOut.add(characterModel);
+            }
+        }
     }
 
     class ViewHolder {
@@ -160,7 +284,7 @@ public class SaveListAdapter extends BaseAdapter {
         TextView type;
         ImageView imgCharacter;
     }
-
+/*
     public class CharacterModelFilter extends Filter {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
@@ -199,9 +323,9 @@ public class SaveListAdapter extends BaseAdapter {
 
                 for (CharacterModel characterModel : originalCharacters){
 
-                   /* if (characterModel.toString().toLowerCase().contains(constraint)){
+                   *//* if (characterModel.toString().toLowerCase().contains(constraint)){
                         filteredItems.add(characterModel);
-                    }*/
+                    }*//*
                 }
                 result.count = filteredItems.size();
                 result.values = filteredItems;
@@ -221,5 +345,5 @@ public class SaveListAdapter extends BaseAdapter {
         protected void publishResults(CharSequence constraint, FilterResults results) {
             updateRecords((ArrayList<CharacterModel>)results.values);
         }
-    }
+    }*/
 }

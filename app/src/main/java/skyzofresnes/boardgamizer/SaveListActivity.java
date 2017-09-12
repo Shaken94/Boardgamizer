@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.support.v4.media.RatingCompat;
 import android.support.v7.app.AlertDialog;
@@ -22,11 +23,15 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -37,7 +42,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SaveListActivity extends AppCompatActivity {
     final List<CharacterModel> characterModels = new ArrayList<>();  // Where we track the selected items
@@ -86,19 +93,27 @@ public class SaveListActivity extends AppCompatActivity {
 
     private void classifiedCharactersList(){
         for (CharacterModel characterModel : characterModels){
-            if (!filtersModel.getGender().contains(characterModel.getGender())){
-                filtersModel.getGender().add(characterModel.getGender());
+            filtersModel.setStrType(getString(R.string.radioGroupType));
+            String type = characterModel.getType();
+            if (!filtersModel.getType().contains(type)){
+                filtersModel.getType().add(type);
             }
-            if (!filtersModel.getOrigin().contains(characterModel.getOrigin())){
-                filtersModel.getOrigin().add(characterModel.getOrigin());
+            filtersModel.setStrOrigin(getString(R.string.radioGroupOrigin));
+            String origin = characterModel.getOrigin();
+            if (!filtersModel.getOrigin().contains(origin)){
+                filtersModel.getOrigin().add(origin);
             }
-            if (!filtersModel.getType().contains(characterModel.getType())){
-                filtersModel.getType().add(characterModel.getType());
+            filtersModel.setStrGender(getString(R.string.radioGroupGender));
+            String gender = characterModel.getGender();
+            if (!filtersModel.getGender().contains(gender)){
+                filtersModel.getGender().add(gender);
             }
         }
     }
 
     public void clickButtonFilters(View v){
+        classifiedCharactersList();
+
         final AlertDialog.Builder builderFilters = new AlertDialog.Builder(this, R.style.MyDialogAlert);
         //final AlertDialog.Builder builderFilters = new AlertDialog.Builder(this);
         // Inflate and set the layout for the dialog
@@ -107,12 +122,20 @@ public class SaveListActivity extends AppCompatActivity {
 
         //Get all objects in inflate
         final EditText inputName = (EditText) inflate.findViewById(R.id.inputName);
+        final ExpandableListView expandableListView = (ExpandableListView) inflate.findViewById(R.id.expandableListViewFilters);
+/*
         final LinearLayout radioGroupGender = (LinearLayout) inflate.findViewById(R.id.layout_gender);
+        final LinearLayout radioGroupOrigin = (LinearLayout) inflate.findViewById(R.id.layout_origin);
+        final LinearLayout scrollViewOrigin = (LinearLayout) inflate.findViewById(R.id.scrollView_layout_origin);
+        final LinearLayout scrollViewType = (LinearLayout) inflate.findViewById(R.id.scrollView_layout_type);
+*/
         final ImageButton btnEraseAll = (ImageButton) inflate.findViewById(R.id.button_erase_all);
         final ImageButton btnCancel = (ImageButton) inflate.findViewById(R.id.button_cancel);
         final ImageButton btnOk = (ImageButton) inflate.findViewById(R.id.button_ok);
 
-        Resources resources = getResources();
+        final ImageView imgGroupFilters = (ImageView) inflate.findViewById(R.id.imageView_groupFilters);
+
+/*        Resources resources = getResources();
         String packageName = getPackageName();
 
         ColorStateList colorStateList = new ColorStateList(
@@ -129,7 +152,10 @@ public class SaveListActivity extends AppCompatActivity {
                 }
         );
 
-        //Add checkBoxes in Gender, Origin and Type RadioGroup
+
+
+        //Add checkBoxes in Gender, Origin and Type Layout
+
         for (String gender : filtersModel.getGender()){
             CheckBox chkBox = new CheckBox(this);
             chkBox.setButtonTintList(colorStateList);
@@ -139,7 +165,115 @@ public class SaveListActivity extends AppCompatActivity {
             radioGroupGender.addView(chkBox);
         }
 
-        //Attribuate the infalte to the dialog builder + set title
+        for (String origin : filtersModel.getOrigin()){
+            CheckBox chkBox = new CheckBox(this);
+            chkBox.setButtonTintList(colorStateList);
+            chkBox.setTextColor(Color.BLACK);
+            chkBox.setText(resources.getIdentifier(Constantes.VALUE_STRING + origin.substring(1), Constantes.VALUE, packageName));
+            chkBox.setTag(origin);
+            scrollViewOrigin.addView(chkBox);
+        }
+
+        for (String type : filtersModel.getType()){
+            CheckBox chkBox = new CheckBox(this);
+            chkBox.setButtonTintList(colorStateList);
+            chkBox.setTextColor(Color.BLACK);
+            chkBox.setText(resources.getIdentifier(Constantes.VALUE_STRING + type.substring(1), Constantes.VALUE, packageName));
+            chkBox.setTag(type);
+            scrollViewType.addView(chkBox);
+        }
+*/
+
+        final HashMap<String, List<String>> expandableListDetail = filtersModel.getFilters();
+        final List<String> expandableListTitle = new ArrayList<>(expandableListDetail.keySet());
+        final ArrayList<ArrayList<Integer>> check_states = new ArrayList<>();
+
+        for(int i = 0; i < expandableListTitle.size(); i++) {
+            ArrayList<Integer> tmp = new ArrayList<>();
+            for(int j = 0; j < expandableListDetail.get(expandableListTitle.get(i)).size(); j++) {
+                tmp.add(0);
+            }
+            check_states.add(tmp);
+        }
+
+        final CustomExpandableListAdapter expandableListAdapter = new CustomExpandableListAdapter(this, expandableListTitle, expandableListDetail, check_states);
+        expandableListView.setAdapter(expandableListAdapter);
+        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                Toast.makeText(getApplicationContext(),
+                        expandableListTitle.get(groupPosition) + " List Expanded.",
+                        Toast.LENGTH_SHORT).show();
+
+                //imgGroupFilters.setBackgroundResource(R.drawable.collapse);
+            }
+        });
+
+        expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+
+            @Override
+            public void onGroupCollapse(int groupPosition) {
+                Toast.makeText(getApplicationContext(),
+                        expandableListTitle.get(groupPosition) + " List Collapsed.",
+                        Toast.LENGTH_SHORT).show();
+
+                //imgGroupFilters.setBackgroundResource(R.drawable.expand);
+            }
+        });
+
+        expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView paramExpandableListView, View paramView, int groupPosition, long id) {
+                ImageView icon=(ImageView)paramView.findViewById(R.id.imageView_groupFilters);
+                for (int i = 0; i < expandableListTitle.size(); i++) {
+                    if (i == groupPosition) {
+                        if (paramExpandableListView.isGroupExpanded(i)) {
+                            paramExpandableListView.collapseGroup(i);
+                            icon.setImageResource(R.drawable.collapse);
+                        } else {
+                            paramExpandableListView.expandGroup(i);
+                            icon.setImageResource(R.drawable.expand);
+                        }
+                    } else {
+                        paramExpandableListView.collapseGroup(i);
+                        icon.setImageResource(R.drawable.collapse);
+                    }
+                }
+                paramExpandableListView.invalidate();
+                return true;            }
+        });
+
+        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosition, long id) {
+                //tick.setVisibility(View.VISIBLE);
+                //v.setChecked(Boolean.TRUE);
+
+                Toast.makeText(
+                        getApplicationContext(),
+                        expandableListTitle.get(groupPosition)
+                                + " -> "
+                                + expandableListDetail.get(
+                                expandableListTitle.get(groupPosition)).get(
+                                childPosition), Toast.LENGTH_SHORT
+                ).show();
+                if(check_states.get(groupPosition).get(childPosition) == 1) {
+                    check_states.get(groupPosition).set(childPosition, 0);
+
+                }else {
+                    check_states.get(groupPosition).set(childPosition, 1);
+                }
+
+                expandableListAdapter.setCheck_states(check_states);
+                expandableListAdapter.notifyDataSetChanged();
+
+                return false;
+            }
+        });
+
+        //inflate to the dialog builder + title
         builderFilters.setView(inflate)
                 .setTitle(R.string.alert_dialog_save_title); //TODO : change title
 
@@ -167,13 +301,51 @@ public class SaveListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String nameChosen = inputName.getText().toString();
 
-                radioGroupGender.getChildCount();
+                HashMap<String, List<String>> kMap = new HashMap<>();
+                for(int i = 0; i < expandableListTitle.size(); i++) {
+                    List<String> tmp = new ArrayList<>();
+                    String key = expandableListTitle.get(i);
+                    for (int j = 0; j < expandableListDetail.get(key).size(); j++){
+                        if (check_states.get(i).get(j) == 1){
+                            tmp.add(expandableListDetail.get(key).get(j));
+                        }
+                    }
+                    if (!tmp.isEmpty()) {
+                        kMap.put(key, tmp);
+                    }
+                }
+                //List<String> genderConstraints = expandableListDetail.get(getString(R.string.radioGroupGender));
+                //List<String> Constraints1 = new ArrayList<>();
+                //for(String str : genderConstraints){
 
-                List<String> constraints = new ArrayList<>();
-                constraints.add(nameChosen);
-                constraints.add("test");
+//                }
+/*
+                List<String> genderConstraints = new ArrayList<>();
+                for (int i=1; i < radioGroupGender.getChildCount(); i++){
+                    CheckBox chkBox = (CheckBox) radioGroupGender.getChildAt(i);
+                    if (chkBox.isChecked()) {
+                        genderConstraints.add(chkBox.getTag().toString());
+                    }
+                }
+
+                List<String> originConstraints = new ArrayList<>();
+                for (int i=1; i < radioGroupOrigin.getChildCount(); i++){
+                    CheckBox chkBox = (CheckBox) radioGroupOrigin.getChildAt(i);
+                    if (chkBox.isChecked()) {
+                        originConstraints.add(chkBox.getTag().toString());
+                    }
+                }
+
+                List<String> typeConstraints = new ArrayList<>();
+                for (int i=1; i < scrollViewType.getChildCount(); i++){
+                    CheckBox chkBox = (CheckBox) scrollViewType.getChildAt(i);
+                    if (chkBox.isChecked()) {
+                        typeConstraints.add(chkBox.getTag().toString());
+                    }
+                }
+*/
                 //saveListViewCharacterAdapter.getFilter().filter(nameChosen);
-                saveListViewCharacterAdapter.filter(nameChosen);
+                saveListViewCharacterAdapter.filter(nameChosen, kMap);
                 //saveListViewCharacterAdapter.getFilter().filter(constraints);
                 alertDialogFilters.dismiss();
             }
@@ -291,7 +463,6 @@ public class SaveListActivity extends AppCompatActivity {
 
             try {
                 characterModels.addAll(FileUtils.readJsonStream(iStream));
-                classifiedCharactersList();
             } catch (IOException e) {
                 Toast.makeText(getApplicationContext(), MessageFormat.format(getString(R.string.error_reading_file), filename, e.getMessage()), Toast.LENGTH_LONG).show();
                 //Toast.makeText(getApplicationContext(), "Error reading file : " + e.getMessage(), Toast.LENGTH_LONG).show();
