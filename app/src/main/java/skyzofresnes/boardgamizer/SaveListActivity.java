@@ -2,17 +2,12 @@ package skyzofresnes.boardgamizer;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.content.res.Resources;
 import android.graphics.Color;
-import android.media.Image;
 import android.os.AsyncTask;
-import android.support.v4.media.RatingCompat;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -20,23 +15,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.ScrollView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,7 +29,6 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SaveListActivity extends AppCompatActivity {
     final List<CharacterModel> characterModels = new ArrayList<>();  // Where we track the selected items
@@ -115,7 +99,6 @@ public class SaveListActivity extends AppCompatActivity {
         classifiedCharactersList();
 
         final AlertDialog.Builder builderFilters = new AlertDialog.Builder(this, R.style.MyDialogAlert);
-        //final AlertDialog.Builder builderFilters = new AlertDialog.Builder(this);
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
         View inflate = getLayoutInflater().inflate(R.layout.alertdialog_filters, null);
@@ -123,142 +106,42 @@ public class SaveListActivity extends AppCompatActivity {
         //Get all objects in inflate
         final EditText inputName = (EditText) inflate.findViewById(R.id.inputName);
         final ExpandableListView expandableListView = (ExpandableListView) inflate.findViewById(R.id.expandableListViewFilters);
-/*
-        final LinearLayout radioGroupGender = (LinearLayout) inflate.findViewById(R.id.layout_gender);
-        final LinearLayout radioGroupOrigin = (LinearLayout) inflate.findViewById(R.id.layout_origin);
-        final LinearLayout scrollViewOrigin = (LinearLayout) inflate.findViewById(R.id.scrollView_layout_origin);
-        final LinearLayout scrollViewType = (LinearLayout) inflate.findViewById(R.id.scrollView_layout_type);
-*/
         final ImageButton btnEraseAll = (ImageButton) inflate.findViewById(R.id.button_erase_all);
         final ImageButton btnCancel = (ImageButton) inflate.findViewById(R.id.button_cancel);
         final ImageButton btnOk = (ImageButton) inflate.findViewById(R.id.button_ok);
-
-        final ImageView imgGroupFilters = (ImageView) inflate.findViewById(R.id.imageView_groupFilters);
-
-/*        Resources resources = getResources();
-        String packageName = getPackageName();
-
-        ColorStateList colorStateList = new ColorStateList(
-                new int[][]{
-
-                        new int[]{-android.R.attr.state_enabled}, //disabled
-                        new int[]{android.R.attr.state_enabled} //enabled
-                },
-                new int[] {
-
-                        Color.GRAY //disabled
-                        ,Color.BLACK //enabled
-
-                }
-        );
-
-
-
-        //Add checkBoxes in Gender, Origin and Type Layout
-
-        for (String gender : filtersModel.getGender()){
-            CheckBox chkBox = new CheckBox(this);
-            chkBox.setButtonTintList(colorStateList);
-            chkBox.setTextColor(Color.BLACK);
-            chkBox.setText(resources.getIdentifier(Constantes.VALUE_STRING + gender.substring(1), Constantes.VALUE, packageName));
-            chkBox.setTag(gender);
-            radioGroupGender.addView(chkBox);
-        }
-
-        for (String origin : filtersModel.getOrigin()){
-            CheckBox chkBox = new CheckBox(this);
-            chkBox.setButtonTintList(colorStateList);
-            chkBox.setTextColor(Color.BLACK);
-            chkBox.setText(resources.getIdentifier(Constantes.VALUE_STRING + origin.substring(1), Constantes.VALUE, packageName));
-            chkBox.setTag(origin);
-            scrollViewOrigin.addView(chkBox);
-        }
-
-        for (String type : filtersModel.getType()){
-            CheckBox chkBox = new CheckBox(this);
-            chkBox.setButtonTintList(colorStateList);
-            chkBox.setTextColor(Color.BLACK);
-            chkBox.setText(resources.getIdentifier(Constantes.VALUE_STRING + type.substring(1), Constantes.VALUE, packageName));
-            chkBox.setTag(type);
-            scrollViewType.addView(chkBox);
-        }
-*/
 
         final HashMap<String, List<String>> expandableListDetail = filtersModel.getFilters();
         final List<String> expandableListTitle = new ArrayList<>(expandableListDetail.keySet());
         final ArrayList<ArrayList<Integer>> check_states = new ArrayList<>();
 
-        for(int i = 0; i < expandableListTitle.size(); i++) {
-            ArrayList<Integer> tmp = new ArrayList<>();
-            for(int j = 0; j < expandableListDetail.get(expandableListTitle.get(i)).size(); j++) {
-                tmp.add(0);
-            }
-            check_states.add(tmp);
-        }
+        initializeCheckStates(expandableListTitle, expandableListDetail, check_states);
 
         final CustomExpandableListAdapter expandableListAdapter = new CustomExpandableListAdapter(this, expandableListTitle, expandableListDetail, check_states);
         expandableListView.setAdapter(expandableListAdapter);
-        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                Toast.makeText(getApplicationContext(),
-                        expandableListTitle.get(groupPosition) + " List Expanded.",
-                        Toast.LENGTH_SHORT).show();
-
-                //imgGroupFilters.setBackgroundResource(R.drawable.collapse);
-            }
-        });
-
-        expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-                Toast.makeText(getApplicationContext(),
-                        expandableListTitle.get(groupPosition) + " List Collapsed.",
-                        Toast.LENGTH_SHORT).show();
-
-                //imgGroupFilters.setBackgroundResource(R.drawable.expand);
-            }
-        });
 
         expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView paramExpandableListView, View paramView, int groupPosition, long id) {
-                ImageView icon=(ImageView)paramView.findViewById(R.id.imageView_groupFilters);
                 for (int i = 0; i < expandableListTitle.size(); i++) {
                     if (i == groupPosition) {
                         if (paramExpandableListView.isGroupExpanded(i)) {
                             paramExpandableListView.collapseGroup(i);
-                            icon.setImageResource(R.drawable.collapse);
                         } else {
                             paramExpandableListView.expandGroup(i);
-                            icon.setImageResource(R.drawable.expand);
                         }
                     } else {
                         paramExpandableListView.collapseGroup(i);
-                        icon.setImageResource(R.drawable.collapse);
                     }
                 }
-                paramExpandableListView.invalidate();
-                return true;            }
+
+                return true;
+            }
         });
 
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
-                //tick.setVisibility(View.VISIBLE);
-                //v.setChecked(Boolean.TRUE);
-
-                Toast.makeText(
-                        getApplicationContext(),
-                        expandableListTitle.get(groupPosition)
-                                + " -> "
-                                + expandableListDetail.get(
-                                expandableListTitle.get(groupPosition)).get(
-                                childPosition), Toast.LENGTH_SHORT
-                ).show();
                 if(check_states.get(groupPosition).get(childPosition) == 1) {
                     check_states.get(groupPosition).set(childPosition, 0);
 
@@ -266,16 +149,16 @@ public class SaveListActivity extends AppCompatActivity {
                     check_states.get(groupPosition).set(childPosition, 1);
                 }
 
-                expandableListAdapter.setCheck_states(check_states);
-                expandableListAdapter.notifyDataSetChanged();
+                //update records
+                expandableListAdapter.updateRecords(check_states);
 
-                return false;
+                return true;
             }
         });
 
         //inflate to the dialog builder + title
         builderFilters.setView(inflate)
-                .setTitle(R.string.alert_dialog_save_title); //TODO : change title
+                .setTitle(R.string.alert_dialog_filters_title);
 
         //Create the alert dialog + show
         final AlertDialog alertDialogFilters = builderFilters.create();
@@ -285,9 +168,16 @@ public class SaveListActivity extends AppCompatActivity {
         btnEraseAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO : ajouter code erase all filters
                 inputName.setText(null);
+                check_states.clear();
+                initializeCheckStates(expandableListTitle, expandableListDetail, check_states);
 
+                for(int i=0; i < expandableListTitle.size(); i++){
+                    expandableListView.collapseGroup(i);
+                }
+
+                //update records
+                expandableListAdapter.updateRecords(check_states);
             }
         });
 
@@ -314,42 +204,21 @@ public class SaveListActivity extends AppCompatActivity {
                         kMap.put(key, tmp);
                     }
                 }
-                //List<String> genderConstraints = expandableListDetail.get(getString(R.string.radioGroupGender));
-                //List<String> Constraints1 = new ArrayList<>();
-                //for(String str : genderConstraints){
 
-//                }
-/*
-                List<String> genderConstraints = new ArrayList<>();
-                for (int i=1; i < radioGroupGender.getChildCount(); i++){
-                    CheckBox chkBox = (CheckBox) radioGroupGender.getChildAt(i);
-                    if (chkBox.isChecked()) {
-                        genderConstraints.add(chkBox.getTag().toString());
-                    }
-                }
-
-                List<String> originConstraints = new ArrayList<>();
-                for (int i=1; i < radioGroupOrigin.getChildCount(); i++){
-                    CheckBox chkBox = (CheckBox) radioGroupOrigin.getChildAt(i);
-                    if (chkBox.isChecked()) {
-                        originConstraints.add(chkBox.getTag().toString());
-                    }
-                }
-
-                List<String> typeConstraints = new ArrayList<>();
-                for (int i=1; i < scrollViewType.getChildCount(); i++){
-                    CheckBox chkBox = (CheckBox) scrollViewType.getChildAt(i);
-                    if (chkBox.isChecked()) {
-                        typeConstraints.add(chkBox.getTag().toString());
-                    }
-                }
-*/
-                //saveListViewCharacterAdapter.getFilter().filter(nameChosen);
                 saveListViewCharacterAdapter.filter(nameChosen, kMap);
-                //saveListViewCharacterAdapter.getFilter().filter(constraints);
                 alertDialogFilters.dismiss();
             }
         });
+    }
+
+    private void initializeCheckStates(List<String> expandableListTitle, HashMap<String, List<String>> expandableListDetail, ArrayList<ArrayList<Integer>> check_states) {
+        for(int i = 0; i < expandableListTitle.size(); i++) {
+            ArrayList<Integer> tmp = new ArrayList<>();
+            for(int j = 0; j < expandableListDetail.get(expandableListTitle.get(i)).size(); j++) {
+                tmp.add(0);
+            }
+            check_states.add(tmp);
+        }
     }
 
     public void clickButtonCancel(View v) {
@@ -456,7 +325,6 @@ public class SaveListActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... arg0) {
-            //int resourceId = getResources().getIdentifier(boardgameMini + Constantes.UNDERSCORE + Constantes.ALL, Constantes.RAW, getPackageName());
             int resourceId = getResources().getIdentifier(filename, Constantes.RAW, getPackageName());
 
             InputStream iStream = getResources().openRawResource(resourceId);
@@ -465,7 +333,6 @@ public class SaveListActivity extends AppCompatActivity {
                 characterModels.addAll(FileUtils.readJsonStream(iStream));
             } catch (IOException e) {
                 Toast.makeText(getApplicationContext(), MessageFormat.format(getString(R.string.error_reading_file), filename, e.getMessage()), Toast.LENGTH_LONG).show();
-                //Toast.makeText(getApplicationContext(), "Error reading file : " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
 
             return null;

@@ -2,7 +2,6 @@ package skyzofresnes.boardgamizer;
 
 import android.app.Activity;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
