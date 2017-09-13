@@ -73,11 +73,9 @@ public class CharacterListActivity extends AppCompatActivity {
 
         if (!isEndList(findViewById(R.id.button_pick_next))) {
             if (v.getTag().equals(getString(R.string.button_draw))){
-            //if (((TextView) v).getText().equals(getString(R.string.button_draw))) {
                 //button pick next and reset visible
                 findViewById(R.id.button_pick_next).setVisibility(View.VISIBLE);
                 findViewById(R.id.button_reset).setVisibility(View.VISIBLE);
-                //((TextView) v).setText(R.string.button_draw_again);
                 v.setTag(R.string.button_draw_again);
             } else {
                 charactersSelected.remove(lastCharacter);
@@ -103,7 +101,6 @@ public class CharacterListActivity extends AppCompatActivity {
         findViewById(R.id.button_reset).setVisibility(View.GONE);
 
         //set text button pick "choose"
-        //((TextView) findViewById(R.id.button_pick)).setText(R.string.button_draw);
         findViewById(R.id.button_pick).setTag(getString(R.string.button_draw));
 
         //Display button pick
@@ -187,8 +184,6 @@ public class CharacterListActivity extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> adapter, View v, int position, long lg) {
                     Log.i("MINE", String.valueOf(position));
                     CharacterModel characterModel = charactersSelected.get(position);
-                    //listViewCharacterAdapter.updateRecords(charactersSelected);
-
                     //Toast.makeText(CharacterListActivity.this, characterModel.getName() + " clicked", Toast.LENGTH_SHORT).show();
                 }
             });

@@ -37,8 +37,9 @@ public class SaveListActivity extends AppCompatActivity {
     private ListView saveListViewCharacter;
     private SaveListAdapter saveListViewCharacterAdapter = null;
 
-    //private Button buttonsave;
-    private ImageButton buttonsave;
+    //private Button buttonSave;
+    private ImageButton buttonSave;
+    private ImageButton buttonSelect;
     private String boardgameMini;
     private String filename;
 
@@ -53,9 +54,12 @@ public class SaveListActivity extends AppCompatActivity {
         saveListViewCharacter = (ListView) findViewById(R.id.savelistview);
 
         //set the button save
-        buttonsave = (ImageButton) findViewById(R.id.button_save);
-        buttonsave.setEnabled(false);
-        buttonsave.setVisibility(View.INVISIBLE);
+        buttonSave = (ImageButton) findViewById(R.id.button_save);
+        buttonSave.setEnabled(false);
+        buttonSave.setVisibility(View.INVISIBLE);
+
+        //set the button select
+        buttonSelect = (ImageButton) findViewById(R.id.button_select);
 
         //get extra declared in previous activity
         boardgameMini = getIntent().getStringExtra(Constantes.BOARDGAME_MINI);
@@ -92,6 +96,31 @@ public class SaveListActivity extends AppCompatActivity {
             if (!filtersModel.getGender().contains(gender)){
                 filtersModel.getGender().add(gender);
             }
+        }
+    }
+
+    private void initializeCheckStates(List<String> expandableListTitle, HashMap<String, List<String>> expandableListDetail, ArrayList<ArrayList<Integer>> check_states) {
+        for(int i = 0; i < expandableListTitle.size(); i++) {
+            ArrayList<Integer> tmp = new ArrayList<>();
+            for(int j = 0; j < expandableListDetail.get(expandableListTitle.get(i)).size(); j++) {
+                tmp.add(0);
+            }
+            check_states.add(tmp);
+        }
+    }
+
+    private void checkSelectedCharacter(ImageButton buttonSelect) {
+        if (mSelectedCharacters.isEmpty()) {
+            //disable button
+            buttonSave.setEnabled(false);
+            buttonSave.setVisibility(View.INVISIBLE);
+            buttonSelect.setTag("selectAll");
+            buttonSelect.setImageResource(R.drawable.select_all1);
+        } else {
+            buttonSave.setEnabled(true);
+            buttonSave.setVisibility(View.VISIBLE);
+            buttonSelect.setTag("deselectAll");
+            buttonSelect.setImageResource(R.drawable.deselect_all1);
         }
     }
 
@@ -211,14 +240,30 @@ public class SaveListActivity extends AppCompatActivity {
         });
     }
 
-    private void initializeCheckStates(List<String> expandableListTitle, HashMap<String, List<String>> expandableListDetail, ArrayList<ArrayList<Integer>> check_states) {
-        for(int i = 0; i < expandableListTitle.size(); i++) {
-            ArrayList<Integer> tmp = new ArrayList<>();
-            for(int j = 0; j < expandableListDetail.get(expandableListTitle.get(i)).size(); j++) {
-                tmp.add(0);
+    public void clickButtonSelect(View v){
+        ImageButton buttonSelect = (ImageButton) v;
+        String tagSelect = buttonSelect.getTag().toString();
+
+        if (tagSelect.equals("selectAll")){
+            for (int i = 0; i < characterModels.size(); i++){
+                CharacterModel characterModel = characterModels.get(i);
+                characterModel.setSelected(true);
+                mSelectedCharacters.add(characterModel);
+                characterModels.set(i, characterModel);
             }
-            check_states.add(tmp);
+        }else{
+            for (int i = 0; i < characterModels.size(); i++){
+                CharacterModel characterModel = characterModels.get(i);
+                characterModel.setSelected(false);
+                mSelectedCharacters.remove(characterModel);
+                characterModels.set(i, characterModel);
+            }
         }
+
+        checkSelectedCharacter(buttonSelect);
+
+        //now update adapter
+        saveListViewCharacterAdapter.updateRecords(characterModels);
     }
 
     public void clickButtonCancel(View v) {
@@ -358,14 +403,7 @@ public class SaveListActivity extends AppCompatActivity {
                         mSelectedCharacters.add(model);
                     }
 
-                    if (mSelectedCharacters.isEmpty()) {
-                        //disable button
-                        buttonsave.setEnabled(false);
-                        buttonsave.setVisibility(View.INVISIBLE);
-                    } else {
-                        buttonsave.setEnabled(true);
-                        buttonsave.setVisibility(View.VISIBLE);
-                    }
+                    checkSelectedCharacter(buttonSelect);
 
                     characterModels.set(position, model);
 

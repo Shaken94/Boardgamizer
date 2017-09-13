@@ -41,6 +41,18 @@
             app:srcCompat="@drawable/filters1" />
 
         <ImageButton
+            android:id="@+id/button_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:onClick="clickButtonSelect"
+            android:scaleType="fitCenter"
+            android:tag="selectAll"
+            app:srcCompat="@drawable/select_all1" />
+
+        <ImageButton
             android:id="@+id/button_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
