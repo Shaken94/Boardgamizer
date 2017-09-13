@@ -67,7 +67,7 @@ public class SaveListActivity extends AppCompatActivity {
 
         //Nom de la box
         final String alert_dialog_add_title = getString(R.string.alert_dialog_add_title);
-        String characters = null;
+        String characters;
         if (filename.toLowerCase().contains(Constantes.MONSTERS)) {
             characters = getString(getResources().getIdentifier(Constantes.VALUE_STRING + boardgameMini + Constantes.UNDERSCORE + Constantes.MONSTERS, Constantes.VALUE, getPackageName()));
         } else {
@@ -81,17 +81,17 @@ public class SaveListActivity extends AppCompatActivity {
 
     private void classifiedCharactersList(){
         for (CharacterModel characterModel : characterModels){
-            filtersModel.setStrType(getString(R.string.radioGroupType));
+            filtersModel.setStrType(getString(R.string.alert_dialog_filters_radioGroupType));
             String type = characterModel.getType();
             if (!filtersModel.getType().contains(type)){
                 filtersModel.getType().add(type);
             }
-            filtersModel.setStrOrigin(getString(R.string.radioGroupOrigin));
+            filtersModel.setStrOrigin(getString(R.string.alert_dialog_filters_radioGroupOrigin));
             String origin = characterModel.getOrigin();
             if (!filtersModel.getOrigin().contains(origin)){
                 filtersModel.getOrigin().add(origin);
             }
-            filtersModel.setStrGender(getString(R.string.radioGroupGender));
+            filtersModel.setStrGender(getString(R.string.alert_dialog_filters_radioGroupGender));
             String gender = characterModel.getGender();
             if (!filtersModel.getGender().contains(gender)){
                 filtersModel.getGender().add(gender);
@@ -114,12 +114,12 @@ public class SaveListActivity extends AppCompatActivity {
             //disable button
             buttonSave.setEnabled(false);
             buttonSave.setVisibility(View.INVISIBLE);
-            buttonSelect.setTag("selectAll");
+            buttonSelect.setTag(Constantes.SELECT_ALL);
             buttonSelect.setImageResource(R.drawable.select_all1);
         } else {
             buttonSave.setEnabled(true);
             buttonSave.setVisibility(View.VISIBLE);
-            buttonSelect.setTag("deselectAll");
+            buttonSelect.setTag(Constantes.DESELECT_ALL);
             buttonSelect.setImageResource(R.drawable.deselect_all1);
         }
     }
@@ -173,7 +173,6 @@ public class SaveListActivity extends AppCompatActivity {
                                         int groupPosition, int childPosition, long id) {
                 if(check_states.get(groupPosition).get(childPosition) == 1) {
                     check_states.get(groupPosition).set(childPosition, 0);
-
                 }else {
                     check_states.get(groupPosition).set(childPosition, 1);
                 }
@@ -218,8 +217,10 @@ public class SaveListActivity extends AppCompatActivity {
 
         btnOk.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                //name chosen from the filters dialog
                 String nameChosen = inputName.getText().toString();
 
+                //Initialize the hashmap with the filters constraints chosen from thr filters dialog
                 HashMap<String, List<String>> kMap = new HashMap<>();
                 for(int i = 0; i < expandableListTitle.size(); i++) {
                     List<String> tmp = new ArrayList<>();
@@ -234,7 +235,15 @@ public class SaveListActivity extends AppCompatActivity {
                     }
                 }
 
+                //filter the original character list in adapter
                 saveListViewCharacterAdapter.filter(nameChosen, kMap);
+
+                //reset the character list from the filter list character
+                characterModels.clear();
+                characterModels.addAll(saveListViewCharacterAdapter.getFilterCharacters());
+
+                //Clear the selected character list
+                mSelectedCharacters.clear();
                 alertDialogFilters.dismiss();
             }
         });
@@ -244,7 +253,7 @@ public class SaveListActivity extends AppCompatActivity {
         ImageButton buttonSelect = (ImageButton) v;
         String tagSelect = buttonSelect.getTag().toString();
 
-        if (tagSelect.equals("selectAll")){
+        if (tagSelect.equals(Constantes.SELECT_ALL)){
             for (int i = 0; i < characterModels.size(); i++){
                 CharacterModel characterModel = characterModels.get(i);
                 characterModel.setSelected(true);
@@ -324,9 +333,13 @@ public class SaveListActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
+                    if (imm.isActive()) {
+                        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+                    }
+
                     alertDialogSaveInputFilename.dismiss();
                     Intent intent = new Intent();
-                    intent.putExtra("filenameChosen", filenameChosen);
+                    intent.putExtra(Constantes.FILENAME_CHOSEN, filenameChosen);
                     setResult(Activity.RESULT_OK, intent);
                     finish();
                 }

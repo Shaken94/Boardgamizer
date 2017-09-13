@@ -25,6 +25,10 @@
     <string name="alert_dialog_save_title">Entrer un nom pour votre liste</string>
     <string name="alert_dialog_save_button_save">Enregistrer</string>
     <string name="alert_dialog_filters_title">Filtres</string>
+    <string name="alert_dialog_filters_nameTextView">Nom</string>
+    <string name="alert_dialog_filters_radioGroupGender">Sexe/Race/Taille</string>
+    <string name="alert_dialog_filters_radioGroupOrigin">Provenance</string>
+    <string name="alert_dialog_filters_radioGroupType">Type</string>
     <string name="input_text_filename">Nom</string>
     <string name="no_more_characters">Plus de %1$s disponibles</string>
     <string name="zombicide">zbc</string>
@@ -44,9 +48,6 @@
     <string name="cg">Boite de base</string>
     <string name="all">Tous les</string>
     <string name="of">de</string>
-    <string name="radioGroupGender">Sexe/Race/Taille</string>
-    <string name="radioGroupOrigin">Provenance</string>
-    <string name="radioGroupType">Type</string>
 
     <!-- ZOMBICIDE -->
     <string name="zbc_characters">survivants</string>

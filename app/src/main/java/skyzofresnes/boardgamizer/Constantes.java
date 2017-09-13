@@ -30,4 +30,7 @@ public final class Constantes {
     public static final String NB_MONSTERS = UNDERSCORE + "nb" + UNDERSCORE + MONSTERS;
     public static final String OF = "of";
     public static final String AROBASE = "@";
+    public static final String SELECT_ALL = "selectAll";
+    public static final String DESELECT_ALL = "deselectAll";
+    public static final String FILENAME_CHOSEN = "filenameChosen";
 }

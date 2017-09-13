@@ -25,6 +25,10 @@
     <string name="alert_dialog_save_title">Enter a name for your list</string>
     <string name="alert_dialog_save_button_save">Save</string>
     <string name="alert_dialog_filters_title">Filters</string>
+    <string name="alert_dialog_filters_nameTextView">Name</string>
+    <string name="alert_dialog_filters_radioGroupGender">Gender/Race/Size</string>
+    <string name="alert_dialog_filters_radioGroupOrigin">Origin</string>
+    <string name="alert_dialog_filters_radioGroupType">Type</string>
     <string name="input_text_filename">Name</string>
     <string name="no_more_characters">No more %1$s available</string>
     <string name="zombicide">zbc</string>
@@ -44,9 +48,6 @@
     <string name="cg">Core game</string>
     <string name="all">All</string>
     <string name="of">of</string>
-    <string name="radioGroupGender">Gender/Race/Size</string>
-    <string name="radioGroupOrigin">Origin</string>
-    <string name="radioGroupType">Type</string>
 
     <!-- ZOMBICIDE -->
     <string name="zbc_characters">survivors</string>

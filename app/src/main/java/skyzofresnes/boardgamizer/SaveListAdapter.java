@@ -19,10 +19,10 @@ import java.util.List;
  */
 
 public class SaveListAdapter extends BaseAdapter {
-    Activity activity;
-    List<CharacterModel> filterCharacters;
-    List<CharacterModel> originalCharacters;
-    LayoutInflater inflater;
+    private Activity activity;
+    private List<CharacterModel> filterCharacters;
+    private List<CharacterModel> originalCharacters;
+    private LayoutInflater inflater;
 
     public SaveListAdapter(Activity activity, List<CharacterModel> characters) {
         this.activity = activity;
@@ -30,7 +30,11 @@ public class SaveListAdapter extends BaseAdapter {
         this.filterCharacters.addAll(characters);
         this.originalCharacters = new ArrayList<>();
         this.originalCharacters.addAll(characters);
-        inflater = activity.getLayoutInflater();
+        this.inflater = activity.getLayoutInflater();
+    }
+
+    public List<CharacterModel> getFilterCharacters() {
+        return filterCharacters;
     }
 
     @Override
@@ -147,13 +151,13 @@ public class SaveListAdapter extends BaseAdapter {
 
     private void addFilterConstraint(List<CharacterModel> listIn, List<CharacterModel> listOut, String str, String constraint) {
         for(CharacterModel characterModel : listIn){
-            if (str.equals(activity.getString(R.string.radioGroupGender)) && characterModel.getGender().equals(constraint)) {
+            if (str.equals(activity.getString(R.string.alert_dialog_filters_radioGroupGender)) && characterModel.getGender().equals(constraint)) {
                 listOut.add(characterModel);
             }
-            if (str.equals(activity.getString(R.string.radioGroupOrigin)) && characterModel.getOrigin().equals(constraint)) {
+            if (str.equals(activity.getString(R.string.alert_dialog_filters_radioGroupOrigin)) && characterModel.getOrigin().equals(constraint)) {
                 listOut.add(characterModel);
             }
-            if (str.equals(activity.getString(R.string.radioGroupType)) && characterModel.getType().equals(constraint)) {
+            if (str.equals(activity.getString(R.string.alert_dialog_filters_radioGroupType)) && characterModel.getType().equals(constraint)) {
                 listOut.add(characterModel);
             }
         }
